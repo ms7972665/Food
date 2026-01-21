@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>AI Recipe Suggestion App</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="app">
+    <header>
+      <div>
+        <h1>AI Recipe Suggestion App 🔨🤖🔧</h1>
+        <p class="muted">Type ingredients and preferences — get creative recipes instantly.</p>
+      </div>
+      <div style="margin-left:auto; display:flex; gap:8px; align-items:center">
+        <div class="pill muted">Local-mode (no API)</div>
+        <button id="apiToggle" class="btn small ghost" title="Toggle OpenAI example">OpenAI Example</button>
+      </div>
+    </header>
+
+    <!-- LEFT: Controls & Results -->
+    <section>
+      <div class="panel controls">
+        <label>What do you have? (ingredients — comma separated)</label>
+        <textarea id="ingredients" rows="2" placeholder="eg: chicken, garlic, lemon, spinach"></textarea>
+
+        <div class="row" style="margin-top:8px">
+          <div>
+            <label>Dietary</label>
+            <select id="diet">
+              <option value="any">Any</option>
+              <option value="vegetarian">Vegetarian</option>
+              <option value="vegan">Vegan</option>
+              <option value="pescatarian">Pescatarian</option>
+              <option value="gluten-free">Gluten-free</option>
+              <option value="keto">Keto</option>
+            </select>
+          </div>
+          <div>
+            <label>Cuisine</label>
+            <select id="cuisine">
+              <option value="any">Any</option>
+              <option>Italian</option>
+              <option>Indian</option>
+              <option>Mexican</option>
+              <option>Chinese</option>
+              <option>Mediterranean</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="row">
+          <div>
+            <label>Meal Type</label>
+            <select id="meal">
+              <option value="any">Any</option>
+              <option>Breakfast</option>
+              <option>Lunch</option>
+              <option>Dinner</option>
+              <option>Snack</option>
+              <option>Dessert</option>
+            </select>
+          </div>
+          <div>
+            <label>Servings</label>
+            <input id="servings" type="number" min="1" value="2">
+          </div>
+        </div>
+
+        <div style="display:flex; gap:8px; margin-top:10px; align-items:center">
+          <button id="generate" class="btn">Suggest Recipes</button>
+          <button id="random" class="btn ghost small">Surprise me</button>
+          <div style="margin-left:auto" class="muted">Time ~ <span id="timeEstimate">15–30</span> min</div>
+        </div>
+
+        <div style="margin-top:12px" class="hint">Pro-tip: add special ingredients (e.g., "gochujang") to bias results.</div>
+      </div>
+
+      <div id="resultsWrap" style="margin-top:12px">
+        <div style="display:flex; justify-content:space-between; align-items:end; gap:12px">
+          <h2 style="margin:6px 0 0 0">Suggestions</h2>
+          <div class="muted" id="querySummary"></div>
+        </div>
+        <div id="results" class="results"></div>
+      </div>
+    </section>
+
+    <!-- RIGHT: Favorites / Details -->
+    <aside class="right">
+      <div class="panel">
+        <h3 style="margin:0 0 8px 0">Saved Recipes ❤️</h3>
+        <div id="favorites" class="favorites">
+          <div class="muted">No saved recipes yet — save a suggestion to keep it here.</div>
+        </div>
+      </div>
+
+      <div class="panel" style="margin-top:12px">
+        <h3 style="margin:0 0 8px 0">Recipe Details</h3>
+        <div id="detail" class="muted">Click a recipe to view full steps and ingredients.</div>
+      </div>
+    </aside>
+
+    <footer>
+      Built with ❤️ — Local suggestion engine. To use real AI, toggle the OpenAI example (it shows fetch snippet).
+    </footer>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
